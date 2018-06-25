@@ -32,36 +32,39 @@
     <main role="main">
 
       <!-- Main jumbotron for a primary marketing message or call to action -->
-      <div class="jumbotron">
+      <!-- <div class="jumbotron"> -->
         <div class="container">
-          <h1 class="display-3">Hello, world!</h1>
+          <!-- <h1 class="display-3">Hello, world!</h1> -->
           <!--<p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>-->
 		  
+		  <h1>Hello, world!</h1>
 		  <form action="/explore" method="post">
-		    <div class="form-group">
-				<label for="exampleFormControlTextarea1">Write a statement to explore</label>
-				<textarea class="form-control" name="inputStatement" id="inputStatement" rows="3" required></textarea>
+		    <div class="form-group row">
+				<label for="inputStatement" class="col-sm-2 col-form-label">Statement</label>
+				<div class="col-sm-10">
+					<textarea class="form-control" name="inputStatement" id="inputStatement" rows="2" required>{{statement}}</textarea>
+				</div>
 			</div>
 			<p>
-				<input class="btn btn-primary btn-lg" type="submit" value="Explore &raquo;">
+				<input class="btn btn-primary" type="submit" value="Explore &raquo;">
 			</p>
 			<!-- <p><a id="btnExplore" class="btn btn-primary btn-lg" href="#" role="button">Explore &raquo;</a></p> -->
 		  </form>
 
-        </div>
-      </div>
+        <!-- </div> -->
+      <!-- </div> -->
 	  
 	  {% if statement %}
-	  <div class="container">
+	  <!-- <div class="container"> -->
 	    <div class="row">
 		  <div class="col-md-4">
-		    <h2>Original Statement</h2>
+		    <h3>Original Statement</h3>
 			<p>
 				{{statement}}
 			</p>
 		  </div>
 		</div>
-	  </div>
+	  <!-- </div> -->
 	  {% endif%}
 
 <!--
