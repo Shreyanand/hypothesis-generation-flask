@@ -1,7 +1,7 @@
 [configuration]
-word2vec_path = ~/word2vec-model/GoogleNews-vectors-negative300.bin
-stanford_corenlp_path = ~/stanford-corenlp-full 
+word2vec_path = /home/najmeri/word2vec-model/GoogleNews-vectors-negative300.bin
+stanford_corenlp_path = /home/najmeri/stanford-corenlp-full/ 
 mydbhost=localhost
 mydbuser=root
-mydbpasswd=password
-mydbdb=db
+mydbpasswd=mas!2261
+mydbdb=yago
