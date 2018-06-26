@@ -62,7 +62,12 @@
 			<p>
 				{{statement}}
 			</p>
+		  </div>
+		</div>
 
+		<div class="row">
+
+		  <div class="col-md-3">
 		    <h3>Named Entities</h3>
 			<ul>
 				{%for (ner, alts)  in replacement_ners%}
@@ -79,7 +84,9 @@
 				{%endfor%}
 					<!-- {{replacement_ners}} -->
 			</ul>
-
+		  </div>
+		  
+		  <div class="col-md-3">
 		    <h3>Events and Phrases</h3>
 			<ul>
 				{%for (verb, alts) in replacement_verbs:%}
@@ -113,6 +120,9 @@
 					<!-- {{replacement_verbphrases}} -->
 			</ul>
 
+		  </div>
+		  
+		  <div class="col-md-3">
 		    <h3>Nouns and Phrases</h3>
 			<ul>
 				{%for (noun, alt) in replacement_nouns:%}
@@ -144,7 +154,9 @@
 				{%endfor%}					
 					<!-- {{replacement_nounphrases}} -->
 			</ul>
+		  </div>
 
+		  <div class="col-md-3">
 		    <h3>Modifiers with Phrases</h3>
 			<ul>
 				{%for (adj, alts) in replacement_adjectives:%}
@@ -176,7 +188,6 @@
 				{%endfor%}					
 					<!-- {{replacement_adjphrases}} -->
 			</ul>
-
 		  </div>
 		</div>
 	  <!-- </div> -->
