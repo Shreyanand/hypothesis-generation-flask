@@ -113,7 +113,25 @@ def explore():
         try:
             similar_ners = model.most_similar([i, j.lower()], [], topk)
             replacement_ners.append((i, similar_ners))
-	
+            for (similar_ner, score) in similar_ners:
+            	connection = pymysql.connect(host=mydbhost, user=mydbuser, passwd=mydbpasswd, db=mydbdb)
+                try:
+                  with connection.cursor() as cursor:
+			        # Execute SQL select statement
+                    cursor.execute("SELECT instance, class FROM simple_types where instance like (select longform from abbreviations where shortform = CONCAT('%',"+ similar_ner + ",'%'))")
+						
+                    # Get the number of rows in the resultset
+                    numrows = cursor.rowcount
+                    # Get and display one row at a time
+                    for x in range(0, numrows):
+                      row = cursor.fetchone()
+                      print(row[0], "-->", row[1])
+                      ner_categories.append((i, row[1]))
+                # Close the connection
+                finally:
+                  # Close connection.
+                  connection.close()
+
         except KeyError as e:
             print(e)
     
