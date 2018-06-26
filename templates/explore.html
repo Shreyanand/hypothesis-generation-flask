@@ -65,8 +65,9 @@
 
 		    <h3>NERs</h3>
 			<p>
-				{%for (alt_ner, ner)  in replacement_ners:%}
+				{%for (alt_ner, ner)  in replacement_ners%}
 					{{alt_ner}}, {{ner}}
+				{%endfor%}
 					<!-- {{replacement_ners}} -->
 			</p>
 
@@ -74,12 +75,14 @@
 			<p>
 				{%for (alt_verb, verb) in replacement_verbs:%}
 					{{alt_verb}}, {{verb}}
+				{%endfor%}					
 					<!-- {{replacement_verbs}} -->
 			</p>
 
 			<p>
 				{%for (alt_verbphrase, verbphrase) in replacement_verbphrases:%}
 					{{alt_verbphrase}}, {{verbphrase}}
+				{%endfor%}					
 					<!-- {{replacement_verbphrases}} -->
 			</p>
 
@@ -87,11 +90,13 @@
 			<p>
 				{%for (alt_noun, noun) in replacement_nouns:%}
 					{{alt_noun}}, {{noun}}
+				{%endfor%}					
 					<!-- {{replacement_nouns}} -->
 			</p>
 			<p>
 				{%for (alt_nounphrase, nounphrase) in replacement_nounphrases:%}
 					{{alt_nounphrase}}, {{nounphrase}}
+				{%endfor%}					
 					<!-- {{replacement_nounphrases}} -->
 			</p>
 
@@ -99,11 +104,13 @@
 			<p>
 				{%for (alt_adj, adj) in replacement_adjectives:%}
 					{{alt_adj}}, {{adj}}
+				{%endfor%}					
 					<!-- {{replacement_adjectives}} -->
 			</p>
 			<p>
 				{%for (alt_adjphrase, adjphrase) in replacement_adjphrases:%}
 					{{alt_adjphrase}}, {{adjphrase}}
+				{%endfor%}					
 					<!-- {{replacement_adjphrases}} -->
 			</p>
 
