@@ -105,10 +105,9 @@ def explore():
     replacement_nounphrases = []
     replacement_adjectives = []
     replacement_adjphrases = []
-    
-	connection = pymysql.connect(host=mydbhost, user=mydbuser, passwd=mydbpasswd, db=mydbdb)
-
-	ner_categories = []
+	
+    connection = pymysql.connect(host=mydbhost, user=mydbuser, passwd=mydbpasswd, db=mydbdb)
+    ner_categories = []
 	
     for (i, j) in to_replace_ners:
         try:
