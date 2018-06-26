@@ -113,7 +113,7 @@ def explore():
         try:
             similar_ners = model.most_similar([i, j.lower()], [], topk)
             replacement_ners.append((i, similar_ners))
-			for (similar_ner, score) in similar_ners:
+            for (similar_ner, score) in similar_ners:
 				try:
 					with connection.cursor() as cursor:
 						# Execute SQL select statement
