@@ -106,10 +106,7 @@ def explore():
     replacement_adjectives = []
     replacement_adjphrases = []
     
-	connection = pymysql.connect(host=mydbhost,
-                             user=mydbuser,
-                             passwd=mydbpasswd,
-                             db=mydbdb)
+	connection = pymysql.connect(host=mydbhost, user=mydbuser, passwd=mydbpasswd, db=mydbdb)
 
 	ner_categories = []
 	
