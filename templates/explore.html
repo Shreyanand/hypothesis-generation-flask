@@ -64,76 +64,118 @@
 			</p>
 
 		    <h3>NERs</h3>
-			<p>
+			<ul>
 				{%for (ner, alts)  in replacement_ners%}
+					<li>
 					{{ner}}
+					<ul>
 					{% for alt in alts %}
+						<li>
 						{{alt}}
+						</li>
 					{% endfor %}
+					</ul>
+					</li>					
 				{%endfor%}
 					<!-- {{replacement_ners}} -->
-			</p>
+			</ul>
 
 		    <h3>Verbs and Verbphrases</h3>
-			<p>
+			<ul>
 				{%for (verb, alts) in replacement_verbs:%}
+					<li>
 					{{verb}}
+					<ul>
 					{% for alt in alts %}
+						<li>
 						{{alt}}
+						</li>
 					{% endfor %}					
+					</ul>
+					</li>
 				{%endfor%}					
 					<!-- {{replacement_verbs}} -->
-			</p>
+			</ul>
 
-			<p>
+			<ul>
 				{%for (verbphrase, alts) in replacement_verbphrases:%}
+					<li>
 					{{verbphrase}}
+					<ul>
 					{% for alt in alts %}
+						<li>
 						{{alt}}
+						</li>
 					{% endfor %}					
+					</ul>
+					</li>
 				{%endfor%}					
 					<!-- {{replacement_verbphrases}} -->
-			</p>
+			</ul>
 
 		    <h3>Nouns and Nounphrases</h3>
-			<p>
+			<ul>
 				{%for (noun, alt) in replacement_nouns:%}
+					<li>
 					{{noun}}
+					<ul>
 					{% for alt in alts %}
+						<li>
 						{{alt}}
+						</li>
 					{% endfor %}					
+					</ul>
+					</li>
 				{%endfor%}					
 					<!-- {{replacement_nouns}} -->
-			</p>
-			<p>
+			</ul>
+			<ul>
 				{%for (nounphrase, alts) in replacement_nounphrases:%}
+					<li>
 					{{nounphrase}}
+					<ul>
 					{% for alt in alts %}
+						<li>
 						{{alt}}
+						</li>
 					{% endfor %}					
+					</ul>
+					</li>
 				{%endfor%}					
 					<!-- {{replacement_nounphrases}} -->
-			</p>
+			</ul>
 
 		    <h3>Adjectives and Adjectivephrases</h3>
-			<p>
+			<ul>
 				{%for (adj, alts) in replacement_adjectives:%}
+					<li>
 					{{adj}}
+					<ul>
 					{% for alt in alts %}
+						<li>
 						{{alt}}
+						</li>
 					{% endfor %}					
+					</ul>
+					</li>
 				{%endfor%}					
 					<!-- {{replacement_adjectives}} -->
-			</p>
-			<p>
+			</ul>
+			<ul>
 				{%for (adjphrase, alts) in replacement_adjphrases:%}
+					<li>
 					{{adjphrase}}
+					<ul>
 					{% for alt in alts %}
+						<li>
 						{{alt}}
+						</li>
 					{% endfor %}					
+					</ul>
+					</li>
 				{%endfor%}					
 					<!-- {{replacement_adjphrases}} -->
-			</p>
+			</ul>
 
 		  </div>
 		</div>
