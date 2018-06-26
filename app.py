@@ -114,7 +114,7 @@ def explore():
             similar_ners = model.most_similar([i, j.lower()], [], topk)
             replacement_ners.append((i, similar_ners))
             for (similar_ner, score) in similar_ners:
-            	connection = pymysql.connect(host=mydbhost, user=mydbuser, passwd=mydbpasswd, db=mydbdb)
+                connection = pymysql.connect(host=mydbhost, user=mydbuser, passwd=mydbpasswd, db=mydbdb)
                 try:
                   with connection.cursor() as cursor:
 			        # Execute SQL select statement
