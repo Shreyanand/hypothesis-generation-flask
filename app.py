@@ -106,10 +106,39 @@ def explore():
     replacement_adjectives = []
     replacement_adjphrases = []
     
+	connection = pymysql.connect(host=mydbhost,
+                             user=mydbuser,
+                             passwd=mydbpasswd,
+                             db=mydbdb)
+
+	ner_categories = []
+	
     for (i, j) in to_replace_ners:
         try:
             similar_ners = model.most_similar([i, j.lower()], [], topk)
             replacement_ners.append((i, similar_ners))
+			for (similar_ner, score) in similar_ners:
+				try:
+					with connection.cursor() as cursor:
+						# Execute SQL select statement
+						cursor.execute("SELECT instance, class FROM simple_types where instance like (select longform from abbreviations where shortform = CONCAT('%',"+ similar_ner + ",'%'))")
+						# Commit your changes if writing
+						# In this case, we are only reading data
+						# db.commit()
+						
+						# Get the number of rows in the resultset
+						numrows = cursor.rowcount
+						
+						# Get and display one row at a time
+						for x in range(0, numrows):
+							row = cursor.fetchone()
+							print(row[0], "-->", row[1])
+							ner_categories.append((i, row[1]))
+				# Close the connection
+				finally:
+					# Close connection.
+					connection.close()
+				
         except KeyError as e:
             print(e)
     
@@ -170,7 +199,7 @@ def explore():
     print(replacement_adjphrases)
 
     
-    return render_template('explore.html', statement = statement, replacement_ners = replacement_ners, replacement_verbs = replacement_verbs, replacement_verbphrases = replacement_verbphrases, replacement_nouns = replacement_nouns, replacement_nounphrases = replacement_nounphrases, replacement_adjectives = replacement_adjectives, replacement_adjphrases = replacement_adjphrases)
+    return render_template('explore.html', statement = statement, replacement_ners = replacement_ners, replacement_verbs = replacement_verbs, replacement_verbphrases = replacement_verbphrases, replacement_nouns = replacement_nouns, replacement_nounphrases = replacement_nounphrases, replacement_adjectives = replacement_adjectives, replacement_adjphrases = replacement_adjphrases, ner_categories = ner_categories)
     #return redirect(url_for('main', statement = _statement))
  
     # validate the received values

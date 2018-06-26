@@ -31,7 +31,7 @@
       </div>
     </nav>
 
-    <main role="main">
+    <!-- <main role="main"> -->
 
       <!-- Main jumbotron for a primary marketing message or call to action -->
       <!-- <div class="jumbotron"> -->
@@ -39,17 +39,18 @@
           <!-- <h1 class="display-3">Hello, world!</h1> -->
           <!--<p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>-->
 		  
-		  <h1>Hello, world!</h1>
+		  <!-- <h1>Hello, world!</h1> -->
 		  <form action="/explore" method="post">
 		    <div class="form-group row">
-				<label for="inputStatement" class="col-sm-2 col-form-label">Statement</label>
-				<div class="col-sm-10">
-					<textarea class="form-control" name="inputStatement" id="inputStatement" rows="2" required>{{statement}}</textarea>
+				<!-- <label for="inputStatement" class="col-sm-2 col-form-label">Statement</label> -->
+				<div class="col-sm-11">
+					<textarea class="form-control" name="inputStatement" id="inputStatement" rows="1" required>{{statement}}</textarea>
 				</div>
+				<div class="col-sm-1">
+					<input class="btn btn-primary" type="submit" value="Explore &raquo;">
+				</div>				
 			</div>
-			<p>
-				<input class="btn btn-primary" type="submit" value="Explore &raquo;">
-			</p>
+
 			<!-- <p><a id="btnExplore" class="btn btn-primary btn-lg" href="#" role="button">Explore &raquo;</a></p> -->
 		  </form>
 
@@ -85,6 +86,14 @@
 					</li>					
 				{%endfor%}
 					<!-- {{replacement_ners}} -->
+			</ul>
+			
+			<ul>
+				{%for (ner, category) in ner_categories %}
+					<li>
+					{{ner}}, {{category}}
+					</li>
+				{{%endfor}}
 			</ul>
 		  </div>
 		  
@@ -219,7 +228,7 @@
 
       </div> <!-- /container -->
 
-    </main>
+    <!-- </main> -->
 
 	<footer class="container">
 		<p>&copy; <a href="https://research.csc.ncsu.edu/mas/">NCSU MAS and SOC Lab</a> 2018</p>
