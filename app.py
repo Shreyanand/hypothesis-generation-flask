@@ -118,7 +118,8 @@ def explore():
                 try:
                   with connection.cursor() as cursor:
 			        # Execute SQL select statement
-                    cursor.execute("SELECT instance, class FROM simple_types where instance like (select longform from abbreviations where shortform = CONCAT('%',"+ similar_ner + ",'%'))")
+                    query = "SELECT instance, class FROM simple_types where instance like (select longform from abbreviations where shortform = CONCAT('%', '"+ similar_ner + "' ,'%'))"
+                    cursor.execute(query)
 						
                     # Get the number of rows in the resultset
                     numrows = cursor.rowcount
