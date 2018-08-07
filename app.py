@@ -29,6 +29,9 @@ from gensim.models import Word2Vec
 
 model = gensim.models.KeyedVectors.load_word2vec_format(word2vec_path, binary=True, limit=500000) 
 
+import nltk
+from nltk.corpus import wordnet
+
 @app.route("/")
 def main():
   return render_template('index.html')
@@ -36,10 +39,14 @@ def main():
 @app.route('/explore',methods=['POST'])
 def explore():
 
+    print("In Explore")
+    print("StanfordCoreNLP path:", stanford_corenlp_path)
+
     nlp = StanfordCoreNLP(stanford_corenlp_path)
 
     # read the posted values from the UI
     statement = request.form['inputStatement']
+    print(statement)
 
     sentence_tokens = nlp.word_tokenize(statement)
     sentence_tags = nlp.pos_tag(statement)
@@ -54,6 +61,13 @@ def explore():
     to_replace_adjphrases = []
     to_replace_nouns = []
     to_replace_nounphrases = []
+
+    replacement_verbs_synonyms = []
+    replacement_verbs_antonyms = []
+    replacement_adjectives_synonyms = []
+    replacement_adjectives_antonyms = []
+    replacement_nouns_synonyms = []
+    replacement_nouns_antonyms = []
 
     for (i, j) in sentence_ner: 
       if(j != 'O'): 
@@ -79,7 +93,7 @@ def explore():
         to_replace_adjphrases.append((adjphrase, i))
         adj_check = 0 
 
-      if(j == 'VBD' or j=='VBZ' or j == 'VBP' or j == 'VBN'):
+      if(j == 'VBD' or j=='VBZ' or j == 'VBP' or j == 'VBN' or j == 'VBG'):
         to_replace_verbs.append(i)
         verb = i
         verb_check = 1
@@ -146,6 +160,17 @@ def explore():
             print(e)
  
     print(replacement_verbs)
+
+    for verb in to_replace_verbs:
+        for syn in wordnet.synsets(verb): 
+            for l in syn.lemmas():
+                replacement_verbs_synonyms.append(l.name())
+                if l.antonyms():
+                    replacement_verbs_antonyms.append(l.antonyms()[0].name)
+
+    print(set(replacement_verbs_synonyms))
+    print(set(replacement_verbs_antonyms))
+
     
     for (verbphrase, nn) in to_replace_verbphrases:
         try:
