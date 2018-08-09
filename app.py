@@ -9,19 +9,19 @@ config.read("config.txt")
 word2vec_path = config.get("configuration","word2vec_path")
 stanford_corenlp_path = config.get("configuration","stanford_corenlp_path")
 
-
 import pymysql
 pymysql.install_as_MySQLdb()
 
-# Connect
+# Connect to DB
 mydbhost = config.get("configuration","mydbhost")
 mydbuser = config.get("configuration","mydbuser")
 mydbpasswd = config.get("configuration","mydbpasswd")
 mydbdb = config.get("configuration","mydbdb")
 
 # importing StandfordCoreNLP to tokenize, tag, and ner
-from stanfordcorenlp import StanfordCoreNLP
 # Tree syntax of natural language: http://www.cs.cornell.edu/courses/cs474/2004fa/lec1.pdf
+from stanfordcorenlp import StanfordCoreNLP
+nlp = StanfordCoreNLP(stanford_corenlp_path)
 
 # Importing word2vec to find similarity and neighboring words
 import gensim
@@ -29,6 +29,7 @@ from gensim.models import Word2Vec
 
 model = gensim.models.KeyedVectors.load_word2vec_format(word2vec_path, binary=True, limit=500000) 
 
+# Importing nltk and wordnet
 import nltk
 from nltk.corpus import wordnet
 
@@ -39,10 +40,8 @@ def main():
 @app.route('/explore',methods=['POST'])
 def explore():
 
-    print("In Explore")
-    print("StanfordCoreNLP path:", stanford_corenlp_path)
-
-    nlp = StanfordCoreNLP(stanford_corenlp_path)
+    # print("In Explore")
+    # print("StanfordCoreNLP path:", stanford_corenlp_path)
 
     # read the posted values from the UI
     statement = request.form['inputStatement']
@@ -168,8 +167,8 @@ def explore():
                 if l.antonyms():
                     replacement_verbs_antonyms.append(l.antonyms()[0].name)
 
-    print(set(replacement_verbs_synonyms))
-    print(set(replacement_verbs_antonyms))
+    print('Replacement Synonyms', set(replacement_verbs_synonyms))
+    print('Replacement Antonyms', set(replacement_verbs_antonyms))
 
     
     for (verbphrase, nn) in to_replace_verbphrases:
