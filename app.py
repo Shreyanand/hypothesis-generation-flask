@@ -167,8 +167,8 @@ def explore():
                 if l.antonyms():
                     replacement_verbs_antonyms.append(l.antonyms()[0].name)
 
-    print('Replacement Synonyms', set(replacement_verbs_synonyms))
-    print('Replacement Antonyms', set(replacement_verbs_antonyms))
+    print('Replacement Verb Synonyms', set(replacement_verbs_synonyms))
+    print('Replacement Verb Antonyms', set(replacement_verbs_antonyms))
 
     
     for (verbphrase, nn) in to_replace_verbphrases:
@@ -188,6 +188,16 @@ def explore():
             print(e)
     
     print(replacement_nouns)
+	
+    for noun in to_replace_nouns:
+        for syn in wordnet.synsets(noun): 
+            for l in syn.lemmas():
+                replacement_nouns_synonyms.append(l.name())
+                if l.antonyms():
+                    replacement_nouns_antonyms.append(l.antonyms()[0].name)
+
+    print('Replacement Noun Synonyms', set(replacement_nouns_synonyms))
+    print('Replacement Noun Antonyms', set(replacement_nouns_antonyms))		
 
     for (nounphrase, nn) in to_replace_nounphrases:
         try:
@@ -206,6 +216,16 @@ def explore():
             print(e)
         
     print(replacement_adjectives)
+	
+    for adjective in to_replace_adjectives:
+        for syn in wordnet.synsets(adjective): 
+            for l in syn.lemmas():
+                replacement_adjectives_synonyms.append(l.name())
+                if l.antonyms():
+                    replacement_adjectives_antonyms.append(l.antonyms()[0].name)
+
+    print('Replacement Adj Synonyms', set(replacement_adjectives_synonyms))
+    print('Replacement Adj Antonyms', set(replacement_adjectives_antonyms))	
 
     for (adjphrase, nn) in to_replace_adjphrases:
         try:
