@@ -149,7 +149,7 @@ def explore():
         except KeyError as e:
             print(e)
     
-    print(replacement_ners)
+    #print(replacement_ners)
         
     for verb in to_replace_verbs:
         try: 
@@ -158,15 +158,15 @@ def explore():
         except KeyError as e:
             print(e)
  
-    print(replacement_verbs)
+    #print(replacement_verbs)
 
     for verb in to_replace_verbs:
         for syn in wordnet.synsets(verb): 
             for l in syn.lemmas():
                 replacement_verbs_synonyms.append(l.name())
                 if l.antonyms():
-                    print('L.Antonyms:', l.antonyms())
-                    replacement_verbs_antonyms.append(l.antonyms()[0].name)
+                    #print('L.Antonyms:', l.antonyms())
+                    replacement_verbs_antonyms.append(l.antonyms()[0].name())
 
     print('Replacement Verb Synonyms', set(replacement_verbs_synonyms))
     print('Replacement Verb Antonyms', set(replacement_verbs_antonyms))
@@ -179,7 +179,7 @@ def explore():
         except KeyError as e:
             print(e)
     
-    print(replacement_verbphrases)
+    #print(replacement_verbphrases)
     
     for noun in to_replace_nouns:
         try:
@@ -188,15 +188,15 @@ def explore():
         except KeyError as e:
             print(e)
     
-    print(replacement_nouns)
+    #print(replacement_nouns)
 	
     for noun in to_replace_nouns:
         for syn in wordnet.synsets(noun): 
             for l in syn.lemmas():
                 replacement_nouns_synonyms.append(l.name())
                 if l.antonyms():
-                    print('L.Antonyms:', l.antonyms())
-                    replacement_nouns_antonyms.append(l.antonyms()[0].name)
+                    #print('L.Antonyms:', l.antonyms())
+                    replacement_nouns_antonyms.append(l.antonyms()[0].name())
 
     print('Replacement Noun Synonyms', set(replacement_nouns_synonyms))
     print('Replacement Noun Antonyms', set(replacement_nouns_antonyms))		
@@ -208,7 +208,7 @@ def explore():
         except KeyError as e:
             print(e)
     
-    print(replacement_nounphrases)
+    #print(replacement_nounphrases)
     
     for adjective in to_replace_adjectives: 
         try: 
@@ -217,15 +217,15 @@ def explore():
         except KeyError as e:
             print(e)
         
-    print(replacement_adjectives)
+    #print(replacement_adjectives)
 	
     for adjective in to_replace_adjectives:
         for syn in wordnet.synsets(adjective): 
             for l in syn.lemmas():
                 replacement_adjectives_synonyms.append(l.name())
                 if l.antonyms():
-                    print('L.Antonyms:', l.antonyms())
-                    replacement_adjectives_antonyms.append(l.antonyms()[0].name)
+                    #print('L.Antonyms:', l.antonyms())
+                    replacement_adjectives_antonyms.append(l.antonyms()[0].name())
 
     print('Replacement Adj Synonyms', set(replacement_adjectives_synonyms))
     print('Replacement Adj Antonyms', set(replacement_adjectives_antonyms))	
@@ -237,7 +237,7 @@ def explore():
         except KeyError as e:
             print(e)
     
-    print(replacement_adjphrases)
+    #print(replacement_adjphrases)
 
     
     return render_template('explore.html', statement = statement, replacement_ners = replacement_ners, replacement_verbs = replacement_verbs, replacement_verbphrases = replacement_verbphrases, replacement_nouns = replacement_nouns, replacement_nounphrases = replacement_nounphrases, replacement_adjectives = replacement_adjectives, replacement_adjphrases = replacement_adjphrases, ner_categories = ner_categories)
@@ -251,4 +251,3 @@ def explore():
 		
 if __name__ == "__main__":
   app.run(host='0.0.0.0', port=80) 
-
