@@ -246,7 +246,7 @@ def explore():
     #print(replacement_adjphrases)
 
     
-    return render_template('explore.html', statement = statement, replacement_ners = replacement_ners, replacement_verbs = replacement_verbs, replacement_verbphrases = replacement_verbphrases, replacement_nouns = replacement_nouns, replacement_nounphrases = replacement_nounphrases, replacement_adjectives = replacement_adjectives, replacement_adjphrases = replacement_adjphrases, ner_categories = ner_categories)
+    return render_template('explore.html', statement = statement, replacement_ners = replacement_ners, replacement_verbs = replacement_verbs, replacement_verbphrases = replacement_verbphrases, replacement_nouns = replacement_nouns, replacement_nounphrases = replacement_nounphrases, replacement_adjectives = replacement_adjectives, replacement_adjphrases = replacement_adjphrases, ner_categories = ner_categories, replacement_verbs_synonyms = replacement_verbs_synonyms, replacement_verbs_antonyms = replacement_verbs_antonyms, replacement_nouns_synonyms = replacement_nouns_synonyms, replacement_adjectives_synonyms = replacement_adjectives_synonyms, replacement_adjectives_antonyms = replacement_adjectives_antonyms)
     #return redirect(url_for('main', statement = _statement))
  
     # validate the received values
