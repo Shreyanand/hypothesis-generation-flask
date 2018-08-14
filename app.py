@@ -167,8 +167,8 @@ def explore():
                 if l.antonyms():
                     #print('L.Antonyms:', l.antonyms())
 				    #replacement_verbs_antonyms.append(l.antonyms()[0].name())
-				    for m in l.antonyms():
-				        replacement_verbs_antonyms.append(m.name())
+                    for m in l.antonyms():
+                        replacement_verbs_antonyms.append(m.name())
 
     print('Replacement Verb Synonyms', set(replacement_verbs_synonyms))
     print('Replacement Verb Antonyms', set(replacement_verbs_antonyms))
@@ -199,8 +199,8 @@ def explore():
                 if l.antonyms():
                     #print('L.Antonyms:', l.antonyms())
                     #replacement_nouns_antonyms.append(l.antonyms()[0].name())
-				    for m in l.antonyms():
-				        replacement_nouns_antonyms.append(m.name())
+                    for m in l.antonyms():
+                        replacement_nouns_antonyms.append(m.name())
 					
     print('Replacement Noun Synonyms', set(replacement_nouns_synonyms))
     print('Replacement Noun Antonyms', set(replacement_nouns_antonyms))		
@@ -230,8 +230,8 @@ def explore():
                 if l.antonyms():
                     #print('L.Antonyms:', l.antonyms())
                     #replacement_adjectives_antonyms.append(l.antonyms()[0].name())
-				    for m in l.antonyms():
-				        replacement_adjectives_antonyms.append(m.name())
+                    for m in l.antonyms():
+                        replacement_adjectives_antonyms.append(m.name())
 					
     print('Replacement Adj Synonyms', set(replacement_adjectives_synonyms))
     print('Replacement Adj Antonyms', set(replacement_adjectives_antonyms))	
