@@ -1,2 +1,6 @@
 #configuration file
 config.txt
+.DS_Store
+GoogleNews-vectors-negative300.bin
+demoflaskpy
+static/.DS_Store
