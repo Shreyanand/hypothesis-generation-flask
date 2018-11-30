@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
- 
+
 <head>
     <title>Hypothesis Generation</title>
     <link href="https://getbootstrap.com/docs/4.1/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -9,7 +9,7 @@
     <!-- <link href="https://getbootstrap.com/docs/4.1/examples/grid/grid.css" rel="stylesheet"> -->
 
 </head>
- 
+
   <body>
 
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
@@ -38,25 +38,25 @@
         <div class="container">
           <!-- <h1 class="display-3">Hello, world!</h1> -->
           <!--<p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>-->
-		  
+
 		  <!-- <h1>Hello, world!</h1> -->
-		  <form action="/explore" method="post">
-		    <div class="form-group row">
+		  <!--<form action="/explore" method="post">-->
+		  <!--  <div class="form-group row">-->
 				<!-- <label for="inputStatement" class="col-sm-2 col-form-label">Statement</label> -->
-				<div class="col-sm-11">
-					<textarea class="form-control" name="inputStatement" id="inputStatement" rows="1" required>{{statement}}</textarea>
-				</div>
-				<div class="col-sm-1">
-					<input class="btn btn-primary" type="submit" value="Explore &raquo;">
-				</div>				
-			</div>
+			<!--	<div class="col-sm-11">-->
+			<!--		<textarea class="form-control" name="inputStatement" id="inputStatement" rows="1" required>{{statement}}</textarea>-->
+			<!--	</div>-->
+			<!--	<div class="col-sm-1">-->
+			<!--		<input class="btn btn-primary" type="submit" value="Explore &raquo;">-->
+			<!--	</div>				-->
+			<!--</div>-->
 
 			<!-- <p><a id="btnExplore" class="btn btn-primary btn-lg" href="#" role="button">Explore &raquo;</a></p> -->
-		  </form>
+		  <!-- </form> -->
 
         <!-- </div> -->
       <!-- </div> -->
-	  
+	  <form action="/generate" method="post">
 	  {% if statement %}
 	  <!-- <div class="container"> -->
 	    <div class="row">
@@ -64,8 +64,9 @@
 		    <h3>Original Statement</h3>
 			<p>
 				{{statement}}
+				<input type="hidden" name="stmnt" value="{{ statement }}">
 			</p>
-			<h3>Statement Sentiment</h3>
+			<h3>Statement Sentiment is </h3>
 			<p>
 				{{statement_sentiment}}
 			</p>
@@ -79,36 +80,36 @@
 			<ul>
 				{%for (ner, alts)  in replacement_ners%}
 					<li>
-					{{ner}}
+					<input type="checkbox" name={{ner}} value="{{ner}}" checked="checked"> {{ner}}<br>
 					<ul>
 					{% for alt in alts %}
 						<li>
-						{{alt}}
+						<input type="checkbox" name={{ner}} value="{{alt[0]}}"> {{alt[0]}}<br>
 						</li>
 					{% endfor %}
 					</ul>
-					</li>					
+					</li>
 				{%endfor%}
 					<!-- {{replacement_ners}} -->
 			</ul>
 
 		  </div>
-		  
+
 		  <div class="col-md-3">
 		    <h3>Events and Phrases</h3>
 			<ul>
 				{%for (verb, alts) in replacement_verbs:%}
 					<li>
-					{{verb}}
+					<input type="checkbox" name={{verb}} value="{{verb}}" checked="checked"> {{verb}}<br>
 					<ul>
 					{% for alt in alts %}
 						<li>
-						{{alt}}
+						<input type="checkbox" name={{verb}} value="{{alt[0]}}"> {{alt[0]}}<br>
 						</li>
-					{% endfor %}					
+					{% endfor %}
 					</ul>
 					</li>
-				{%endfor%}					
+				{%endfor%}
 					<!-- {{replacement_verbs}} -->
 			</ul>
 
@@ -121,30 +122,30 @@
 						<li>
 						{{alt}}
 						</li>
-					{% endfor %}					
+					{% endfor %}
 					</ul>
 					</li>
-				{%endfor%}					
+				{%endfor%}
 					<!-- {{replacement_verbphrases}} -->
 			</ul>
 
 		  </div>
-		  
+
 		  <div class="col-md-3">
 		    <h3>Nouns and Phrases</h3>
 			<ul>
 				{%for (noun, alts) in replacement_nouns:%}
 					<li>
-					{{noun}}
+					<input type="checkbox" name={{noun}} value="{{noun}}" checked="checked"> {{noun}}<br>
 					<ul>
 					{% for alt in alts %}
 						<li>
-						{{alt}}
+						<input type="checkbox" name={{noun}} value="{{alt[0]}}"> {{alt[0]}}<br>
 						</li>
-					{% endfor %}					
+					{% endfor %}
 					</ul>
 					</li>
-				{%endfor%}					
+				{%endfor%}
 					<!-- {{replacement_nouns}} -->
 			</ul>
 			<ul>
@@ -156,10 +157,10 @@
 						<li>
 						{{alt}}
 						</li>
-					{% endfor %}					
+					{% endfor %}
 					</ul>
 					</li>
-				{%endfor%}					
+				{%endfor%}
 					<!-- {{replacement_nounphrases}} -->
 			</ul>
 		  </div>
@@ -169,16 +170,16 @@
 			<ul>
 				{%for (adj, alts) in replacement_adjectives:%}
 					<li>
-					{{adj}}
+					<input type="checkbox" name={{adj}} value="{{adj}}" checked="checked"> {{adj}}<br>
 					<ul>
 					{% for alt in alts %}
 						<li>
-						{{alt}}
+						<input type="checkbox" name={{adj}} value="{{alt[0]}}"> {{alt[0]}}<br>
 						</li>
-					{% endfor %}					
+					{% endfor %}
 					</ul>
 					</li>
-				{%endfor%}					
+				{%endfor%}
 					<!-- {{replacement_adjectives}} -->
 			</ul>
 			<ul>
@@ -190,17 +191,22 @@
 						<li>
 						{{alt}}
 						</li>
-					{% endfor %}					
+					{% endfor %}
 					</ul>
 					</li>
-				{%endfor%}					
+				{%endfor%}
 					<!-- {{replacement_adjphrases}} -->
 			</ul>
 		  </div>
 		</div>
-		
+
 	  <!-- </div> -->
 	  {% endif%}
+	  	  <p>
+			<input class="btn btn-primary btn-lg" type="submit" value="Generate &raquo;">
+		  </p>
+			<!-- <p><a id="btnExplore" class="btn btn-primary btn-lg" href="#" role="button">Explore &raquo;</a></p> -->
+		  </form>
 
 <!--
       <div class="container">
@@ -235,7 +241,7 @@
 	<!-- <script> -->
 	<!-- $(function() { -->
     <!-- $('#btnExplore').click(function() { -->
- 
+
         <!-- $.ajax({ -->
             <!-- url: '/explore', -->
             <!-- data: $('form').serialize(), -->
@@ -251,7 +257,7 @@
 <!-- }); -->
 	<!-- </script> -->
 
-	
+
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
@@ -262,5 +268,5 @@
     <script src="https://getbootstrap.com/docs/4.1/dist/js/bootstrap.min.js"></script>
   </body>
 </body>
- 
+
 </html>

@@ -21,12 +21,8 @@ mydbuser = config.get("configuration","mydbuser")
 mydbpasswd = config.get("configuration","mydbpasswd")
 mydbdb = config.get("configuration","mydbdb")
 
-
-# importing StandfordCoreNLP to tokenize, tag, and ner
-# Tree syntax of natural language: http://www.cs.cornell.edu/courses/cs474/2004fa/lec1.pdf
 nlp = StanfordCoreNLP(stanford_corenlp_path)
 print('Core NLP instance')
-
 # Importing word2vec to find similarity and neighboring words
 model = gensim.models.KeyedVectors.load_word2vec_format(word2vec_path, binary=True, limit=500000) 
 print('Word 2 Vec model ready')
@@ -57,16 +53,56 @@ def main():
   print('Main Page opened')
   return render_template('index.html')
 
+
+@app.route('/generate',methods=['POST'])
+def generate():
+    print("Generating alternatives")
+    statement = request.form['stmnt']
+    alt = []
+    alt_stmnts = []
+    for i in request.form:
+        if i != "stmnt": 
+            opt = request.form.getlist(i)
+            for j in opt:
+                if i != j:
+                    alt.append((i, j))
+            
+#        statement = statement.replace(i, request.form[i])
+#    print (statement)
+    from itertools import chain, combinations
+    def all_subsets(ss):
+        return chain(*map(lambda x: combinations(ss, x), range(0, len(ss)+1)))
+    
+    asubs = set(all_subsets(alt))
+    print(len(asubs)) 
+    for subset in asubs:
+        nustat = statement
+        for i in subset:
+            nustat = nustat.replace(i[0],i[1])
+        alt_stmnts.append( (nustat, sentiments(nustat, nlp)) ) 
+    
+    return render_template ('generate.html', 
+                       statements = set(alt_stmnts))
+    
+
+
 @app.route('/explore',methods=['POST'])
 def explore():
+    
+    # importing StandfordCoreNLP to tokenize, tag, and ner
+    # Tree syntax of natural language: http://www.cs.cornell.edu/courses/cs474/2004fa/lec1.pdf
+
 
     # print("In Explore")
     # print("StanfordCoreNLP path:", stanford_corenlp_path)
+    
 
     # read the posted values from the UI
+    statement = ''
     print('explore')
-    statement = request.form['inputStatement']
-    print(statement)
+    if request.form.get('inputStatement', None):
+        statement = request.form['inputStatement']
+        print(statement)
     
     
     #sentence_tokens = nlp.word_tokenize(statement)
@@ -189,6 +225,7 @@ def explore():
         except KeyError as e:
             print(e)
             
+    replacement_verbs = []      
     print("Alternative Verbs" +  str(replacement_verbs))
             
     for (verbphrase, nn) in to_replace_verbphrases:
@@ -282,13 +319,13 @@ def explore():
 #                    #print('L.Antonyms:', l.antonyms())
 #                    #replacement_adjectives_antonyms.append(l.antonyms()[0].name())
 #                    for m in l.antonyms():
-#                        replacement_adjectives_antonyms.append(m.name())
+#                        replacement_adjectives_antonyms.append(m.name(
 #					
 #    print('Replacement Adj Synonyms', set(replacement_adjectives_synonyms))
 #    print('Replacement Adj Antonyms', set(replacement_adjectives_antonyms))	
 
-    nlp.close()
-    
+#    nlp.close()
+    print("Analysis complete")
     return render_template ('explore.html', 
                            statement = statement,
                            statement_sentiment = statement_sentiment,
@@ -309,4 +346,5 @@ def explore():
         # return json.dumps({'html':'<span>Enter the required fields</span>'})
 		
 if __name__ == "__main__":
-  app.run(host='0.0.0.0', port=80) 
+  #!export FLASK_ENV=development
+  app.run(host='0.0.0.0', port=5000, debug=True)

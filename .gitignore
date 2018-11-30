@@ -4,3 +4,8 @@ config.txt
 GoogleNews-vectors-negative300.bin
 demoflaskpy
 static/.DS_Store
+hacker_news.hdf5
+stories.txt
+stories_train.txt
+stories_test.txt
+textgenrnn_weights.hdf5
