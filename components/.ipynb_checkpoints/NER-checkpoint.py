@@ -24,6 +24,11 @@ def get_args():
     return args
 
 
+args = get_args()
+nlp = StanfordCoreNLP(args.host, port=int(args.port))
+sentence = args.sentence
+
+
 def ners(sentence, nlp):
     sentence_ner = nlp.ner(sentence + ' dummy')
     to_replace_ners = []
@@ -39,12 +44,8 @@ def ners(sentence, nlp):
         else:
             org = org + "_" + i
             kind = j
+    #print (sentence_ner)   
     print (json.dumps(to_replace_ners))
     
-    
-if __name__ == "__main__":
-    args = get_args()
-    nlp = StanfordCoreNLP(args.host, port=int(args.port))
-    sentence = args.sentence
-    ners(sentence, nlp)
-    nlp.close()
+ners(sentence, nlp)
+nlp.close()
