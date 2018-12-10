@@ -21,7 +21,7 @@ mydbuser = config.get("configuration","mydbuser")
 mydbpasswd = config.get("configuration","mydbpasswd")
 mydbdb = config.get("configuration","mydbdb")
 
-nlp = StanfordCoreNLP(stanford_corenlp_path)
+nlp = StanfordCoreNLP("http://localhost", port=9000)
 print('Core NLP instance')
 # Importing word2vec to find similarity and neighboring words
 model = gensim.models.KeyedVectors.load_word2vec_format(word2vec_path, binary=True, limit=500000) 
